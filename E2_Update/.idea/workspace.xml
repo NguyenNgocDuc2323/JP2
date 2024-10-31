@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="896eb1e4-b1f8-4c53-83cb-567e8e093a8b" name="Changes" comment="">
+    <list default="true" id="9554c081-230d-470e-84c1-de17419dfe1e" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BTVN_E2.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JP2_E2.iml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -21,8 +21,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -30,12 +31,10 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 7
+  &quot;associatedIndex&quot;: 4
 }</component>
-  <component name="ProjectId" id="2oBY3QPLpuR7MRNIPhWagJtZEjE" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="1" id="Add" />
-  </component>
+  <component name="ProjectId" id="2o36MH5G4pwRWvWRpL4P4y2cfkC" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -51,7 +50,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/ADMIN/IdeaProjects/C2309G/BTVN_E2/src/Main.java&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/ADMIN/IdeaProjects/C2309G/JP2_E2/src/Main.java&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -66,14 +65,22 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="896eb1e4-b1f8-4c53-83cb-567e8e093a8b" name="Changes" comment="" />
-      <created>1730344237189</created>
+      <changelist id="9554c081-230d-470e-84c1-de17419dfe1e" name="Changes" comment="" />
+      <created>1730085862844</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1730344237189</updated>
-      <workItem from="1730344238330" duration="2718000" />
-      <workItem from="1730347021285" duration="2465000" />
-      <workItem from="1730355397859" duration="202000" />
+      <updated>1730085862844</updated>
+      <workItem from="1730085863830" duration="523000" />
+      <workItem from="1730086433455" duration="3866000" />
+      <workItem from="1730109246845" duration="5907000" />
+      <workItem from="1730171484539" duration="955000" />
+      <workItem from="1730347006035" duration="7000" />
+      <workItem from="1730355602776" duration="121000" />
+      <workItem from="1730355953077" duration="26000" />
+      <workItem from="1730355991403" duration="75000" />
+      <workItem from="1730356080847" duration="25000" />
+      <workItem from="1730356118916" duration="951000" />
+      <workItem from="1730357100079" duration="794000" />
     </task>
     <servers />
   </component>

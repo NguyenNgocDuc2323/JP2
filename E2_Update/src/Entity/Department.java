@@ -2,13 +2,10 @@ package Entity;
 
 public class Department {
     private int id;
-    private String code;
     private String name;
-    public Department(){;}
-
-    public Department(int id, String code, String name) {
+    public Department() {;}
+    public Department(int id, String name) {
         this.id = id;
-        this.code = code;
         this.name = name;
     }
 
@@ -18,14 +15,6 @@ public class Department {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
     }
 
     public String getName() {
@@ -40,7 +29,6 @@ public class Department {
     public String toString() {
         return "Department{" +
                 "id=" + id +
-                ", code='" + code + '\'' +
                 ", name='" + name + '\'' +
                 '}';
     }
