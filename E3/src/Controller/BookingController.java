@@ -99,14 +99,18 @@ public class BookingController implements IGeneric<Booking> {
 
     @Override
     public Map<RoomType, Double> calculateRevenueByRoomType(List<Booking> bookings) {
-        return bookings.stream()
-                .collect(Collectors.groupingBy(
-                        booking -> booking.getRoom().getRoomType(),
-                        Collectors.summingDouble(booking -> {
-                            long days = ChronoUnit.DAYS.between(booking.getCheckInDateTime(), booking.getCheckOutDateTime());
-                            long hours = days * 24;
-                            return hours * booking.getRoom().getPricePerHour();
-                        })
-                ));
+        Map<RoomType, Double> revenueByRoomType = new HashMap<>();
+        bookings.stream()
+                .forEach(booking -> {
+            RoomType roomType = booking.getRoom().getRoomType();
+            long days = ChronoUnit.DAYS.between(booking.getCheckInDateTime(), booking.getCheckOutDateTime());
+            double revenue = days * 24 * booking.getRoom().getPricePerHour();
+            double currentRevenue = revenueByRoomType.getOrDefault(roomType, 0.0); // nếu không có roomType thì trả về 0.0 vì giá trị là double
+            revenueByRoomType.put(roomType, currentRevenue + revenue);
+        });
+
+        return revenueByRoomType;
     }
+
+
 }

@@ -58,8 +58,8 @@ public class Main {
                 LocalDate.of(2023, 8, 19)
         ));
 //        3.1 :
-        Booking booked = bookingController.bookRoom();
-        System.out.println("Your Booking : " + booked);
+//        Booking booked = bookingController.bookRoom();
+//        System.out.println("Your Booking : " + booked);
 
 //        3.2 :
         Map<RoomType, Double> listRevenueByRoomType = bookingController.calculateRevenueByRoomType( bookings);
