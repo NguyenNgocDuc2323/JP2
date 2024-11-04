@@ -99,19 +99,22 @@ public class BookingController implements IGeneric<Booking> {
 
     @Override
     public Map<RoomType, Double> calculateRevenueByRoomType(List<Booking> bookings) {
-        return bookings.stream()
-                .collect(Collectors.groupingBy(
-                        booking -> booking.getRoom().getRoomType(),
-                        Collectors.summingDouble(booking -> {
-                            long days = ChronoUnit.DAYS.between(booking.getCheckInDateTime(), booking.getCheckOutDateTime());
-                            return days * 24 * booking.getRoom().getPricePerHour();
-                        })
-                ));
+        Map<RoomType, Double> revenueByRoomType = new HashMap<>();
+        bookings.stream()
+                .forEach(booking -> {
+            RoomType roomType = booking.getRoom().getRoomType();
+            long days = ChronoUnit.DAYS.between(booking.getCheckInDateTime(), booking.getCheckOutDateTime());
+            double revenue = days * 24 * booking.getRoom().getPricePerHour();
+            double currentRevenue = revenueByRoomType.getOrDefault(roomType, 0.0);
+            revenueByRoomType.put(roomType, currentRevenue + revenue);
+        });
+
+        return revenueByRoomType;
     }
     @Override
     public Map<RoomType, Double> getMaxRevenueEntryFor2023(List<Booking> bookings) {
         Map<RoomType, Double> revenueByRoomTypeFor2023 = bookings.stream()
-                .filter(booking -> isInYear2023(booking.getCheckInDateTime()) || isInYear2023(booking.getCheckOutDateTime()))
+                .filter(booking -> booking.getCheckInDateTime().getYear() == 2023 && booking.getCheckOutDateTime().getYear() == 2023)
                 .collect(Collectors.groupingBy(
                         booking -> booking.getRoom().getRoomType(),
                         Collectors.summingDouble(booking -> {
@@ -122,13 +125,7 @@ public class BookingController implements IGeneric<Booking> {
         return revenueByRoomTypeFor2023.entrySet()
                 .stream()
                 .max(Map.Entry.comparingByValue())
-                .map(maxEntry -> Map.of(maxEntry.getKey(), maxEntry.getValue()))
+                .map(maxEntry -> Map.of(maxEntry.getKey(),maxEntry.getValue()))
                 .orElse(Map.of());
     }
-
-    private boolean isInYear2023(LocalDate date) {
-        return date != null && date.getYear() == 2023;
-    }
-
-
 }
