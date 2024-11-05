@@ -7,11 +7,11 @@ public class Booking {
     private int id;
     private Customer customer;
     private Room room;
-    private LocalDate checkInDateTime;
-    private LocalDate checkOutDateTime;
+    private LocalDateTime checkInDateTime;
+    private LocalDateTime checkOutDateTime;
     public Booking() {;}
 
-    public Booking(int id,Room room, Customer customer, LocalDate checkInDateTime, LocalDate checkOutDateTime) {
+    public Booking(int id,Room room, Customer customer, LocalDateTime checkInDateTime, LocalDateTime checkOutDateTime) {
         this.id = id;
         this.customer = customer;
         this.room = room;
@@ -43,19 +43,19 @@ public class Booking {
         this.room = room;
     }
 
-    public LocalDate getCheckInDateTime() {
+    public LocalDateTime getCheckInDateTime() {
         return checkInDateTime;
     }
 
-    public void setCheckInDateTime(LocalDate checkInDateTime) {
+    public void setCheckInDateTime(LocalDateTime checkInDateTime) {
         this.checkInDateTime = checkInDateTime;
     }
 
-    public LocalDate getCheckOutDateTime() {
+    public LocalDateTime getCheckOutDateTime() {
         return checkOutDateTime;
     }
 
-    public void setCheckOutDateTime(LocalDate checkOutDateTime) {
+    public void setCheckOutDateTime(LocalDateTime checkOutDateTime) {
         this.checkOutDateTime = checkOutDateTime;
     }
 

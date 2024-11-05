@@ -3,8 +3,6 @@ import Entity.Booking;
 import Entity.Customer;
 import Entity.Room;
 import Entity.RoomType;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,47 +17,49 @@ public class Main {
         List<Booking> bookings = new ArrayList<>();
         BookingController bookingController = new BookingController(bookings);
         rooms.add(new Room("RS001", RoomType.Single,8));
+        rooms.add(new Room("RS002", RoomType.Single,10));
+        rooms.add(new Room("RS003", RoomType.Single,15));
         rooms.add(new Room("RD001", RoomType.Double,12));
         rooms.add(new Room("RQ002", RoomType.Queen,35));
         rooms.add(new Room("RT001", RoomType.Triple,12.5));
         rooms.add(new Room("RQ002", RoomType.Quad,20.5));
 
-        customers.add(new Customer("001","Mr.Linus Tovaldo","84125325345457"));
-        customers.add(new Customer("002","Mr.Bill","91124235346467"));
-        customers.add(new Customer("003","Mr.Turing","911242353464"));
+        customers.add(new Customer(1,"Mr.Linus Tovaldo","84125325345457"));
+        customers.add(new Customer(2,"Mr.Bill","91124235346467"));
+        customers.add(new Customer(3,"Mr.Turing","911242353464"));
 
         bookings.add(new Booking(1, rooms.get(0), customers.get(0),
-                LocalDate.of(2023, 03, 15),
-                LocalDate.of(2023, 03, 16)
+                LocalDateTime.of(2023, 03, 15, 13,15,0),
+                LocalDateTime.of(2023, 03, 16,13,15,0)
         ));
 
         bookings.add(new Booking(2, rooms.get(0), customers.get(1),
-                LocalDate.of(2024, 06, 9),
-                LocalDate.of(2024, 06, 10)
+                LocalDateTime.of(2024, 06, 9,10,0,0),
+                LocalDateTime.of(2024, 06, 10,10,10,0)
         ));
 
         bookings.add(new Booking(3, rooms.get(1), customers.get(1),
-                LocalDate.of(2024, 03, 11),
-                LocalDate.of(2024, 03, 13)
+                LocalDateTime.of(2024, 03, 11,23,30,0),
+                LocalDateTime.of(2024, 03, 13,23,30,0)
         ));
 
         bookings.add(new Booking(4, rooms.get(3), customers.get(2),
-                LocalDate.of(2023, 11, 11),
-                LocalDate.of(2023, 11, 13)
+                LocalDateTime.of(2023, 11, 11,22,15,0),
+                LocalDateTime.of(2023, 11, 13,22,15,0)
         ));
 
         bookings.add(new Booking(5, rooms.get(3), customers.get(0),
-                LocalDate.of(2023, 10, 25),
-                LocalDate.of(2023, 10, 26)
+                LocalDateTime.of(2023, 10, 25,14,15,0),
+                LocalDateTime.of(2023, 10, 26,14,15,0)
         ));
 
         bookings.add(new Booking(6, rooms.get(4), customers.get(0),
-                LocalDate.of(2024, 8, 18),
-                LocalDate.of(2024, 8, 19)
+                LocalDateTime.of(2024, 8, 18,20,45,0),
+                LocalDateTime.of(2024, 8, 19,20,45,0)
         ));
 //        3.1 :
-//        Booking booked = bookingController.bookRoom();
-//        System.out.println("Your Booking : " + booked);
+        Booking booked = bookingController.bookRoom(rooms);
+        System.out.println("Your Booking : " + booked);
 
 //        3.2 :
         Map<RoomType, Double> listRevenueByRoomType = bookingController.calculateRevenueByRoomType( bookings);

@@ -1,22 +1,22 @@
 package Entity;
 
 public class Customer {
-    private String id;
+    private int id;
     private String cusName;
     private String cusPhone;
     public Customer(){;}
 
-    public Customer(String id, String cusName, String cusPhone) {
+    public Customer(int id, String cusName, String cusPhone) {
         this.id = id;
         this.cusName = cusName;
         this.cusPhone = cusPhone;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
