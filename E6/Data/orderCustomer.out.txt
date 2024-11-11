@@ -1,0 +1,21 @@
+Customer: Nguyen Ngoc Duc
+Product: Iphone 15
+Price: 3000.0
+Quantity: 2
+Time: 08/11/2024 08:15
+-------------------------
+Customer: Nguyen Thi Phuong
+Product: Iphone 15
+Price: 4500.0
+Quantity: 3
+Time: 08/11/2024 11:10
+-------------------------
+Customer: Nguyen Thi Phuong
+Product: SamSung Galaxy
+Price: 1200.0
+Quantity: 1
+Time: 08/11/2024 11:10
+-------------------------
+Total bill for Nguyen Ngoc Duc: 3000.0
+Total bill for Nguyen Thi Phuong: 5700.0
+Total bill for Bean: 0.0
