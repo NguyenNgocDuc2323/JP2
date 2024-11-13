@@ -1,0 +1,7 @@
+Total for Month: MARCH
+Product: Sam Sung Click %: 100.00% Add to Cart %: 100.00% Check Out %: 100.00%
+------------
+Total for Month: FEBRUARY
+Product: Sam Sung Click %: 9.01% Add to Cart %: 20.00% Check Out %: 0.00%
+Product: Iphone Click %: 90.99% Add to Cart %: 80.00% Check Out %: 100.00%
+------------
