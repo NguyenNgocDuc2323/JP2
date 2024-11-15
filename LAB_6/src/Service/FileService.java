@@ -1,92 +1,107 @@
 package Service;
 
-import Entity.Product;
-import Entity.ProductNumberInfor;
-import IGereral.IGeneric;
+import Entity.CRStatistic;
+import Entity.Statistic;
+import IGeneral.IFileGeneric;
 
 import java.io.*;
 import java.time.LocalDate;
-import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
-public class FileService implements IGeneric<ProductNumberInfor> {
-    private List<ProductNumberInfor> productNumberInfors;
-    private List<Product> products;
-    public FileService(List<ProductNumberInfor> productNumberInfors, List<Product> products) {
-        this.productNumberInfors = productNumberInfors;
-        this.products = products;
-    }
+public class FileService implements IFileGeneric<Statistic> {
+    public FileService() {}
+
     @Override
-    public List<ProductNumberInfor> readFile(String path) {
-        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                if (!line.isEmpty()) {
-                    String[] data = line.split(",");
-                    int ProductNumberInforId = Integer.parseInt(data[0]);
-                    int productId = Integer.parseInt(data[1]);
-                    if (productId > 0 && productId <= products.size()) {
-                        Product foundProduct = products.get(productId - 1);
-                        int clickNumber = Integer.parseInt(data[2]);
-                        int addToCartNumber = Integer.parseInt(data[3]);
-                        int checkOutNumber = Integer.parseInt(data[4]);
-                        LocalDate dateTime = LocalDate.parse(data[5]);
-                        ProductNumberInfor p = new ProductNumberInfor(ProductNumberInforId, foundProduct, clickNumber, addToCartNumber, checkOutNumber, dateTime);
-                        productNumberInfors.add(p);
-                    }
+    public List<Statistic> readFileStatistics(String fileName) {
+        List<Statistic> statistics = new ArrayList<>();
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(fileName));
+            String lineData;
+            while ((lineData = br.readLine()) != null) {
+                Statistic statistic = new Statistic();
+                if(!lineData.isEmpty()){
+                    String[] data = lineData.split(";");
+                    statistic.setId(Integer.parseInt(String.valueOf(data[0])));
+                    statistic.setView(Integer.parseInt(String.valueOf(data[1])));
+                    statistic.setAddToCart(Integer.parseInt(String.valueOf(data[2])));
+                    statistic.setCheckOut(Integer.parseInt(String.valueOf(data[3])));
+                    statistic.setCreateAtDate(LocalDate.parse(data[4]));
+                    statistics.add(statistic);
                 }
             }
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
+
+        }catch (IOException e){
+            e.getCause();
         }
-        return productNumberInfors;
+        return statistics;
     }
     @Override
-    public void writeFile(String path) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
-            productNumberInfors.stream()
-                    .collect(Collectors.groupingBy(
-                            p -> p.getDateTime().getMonth().toString().toUpperCase(),
-                            Collectors.groupingBy(p -> p.getProduct().getName())
-                    ))
-                    .forEach((month, productDataMap) -> {
-                        StringBuilder result = new StringBuilder();
-                        result.append("Total for Month: ").append(month).append("\n");
+    public void writeFileStatistics(String fileName, Map<CRStatistic, CRStatistic> statisticMap) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileName))) {
+            statisticMap.forEach((key, value) -> {
+                try {
+                    int totalView = value.getTotalView();
+                    int totalAddToCart = value.getTotalAddToCart();
+                    int totalCheckOut = value.getTotalCheckOut();
 
-                        AtomicInteger totalClicksForMonth = new AtomicInteger();
-                        AtomicInteger totalAddToCartForMonth = new AtomicInteger();
-                        AtomicInteger totalCheckOutForMonth = new AtomicInteger();
+                    double addToCartPercent = totalView == 0 ? 0 : (totalAddToCart / (double) totalView) * 100;
+                    double checkOutPercent = totalView == 0 ? 0 : (totalCheckOut / (double) totalView) * 100;
 
-                        productDataMap.forEach((productName, productData) -> {
-                            totalClicksForMonth.addAndGet(productData.stream().mapToInt(ProductNumberInfor::getClickNumber).sum());
-                            totalAddToCartForMonth.addAndGet(productData.stream().mapToInt(ProductNumberInfor::getAddToCartNumber).sum());
-                            totalCheckOutForMonth.addAndGet(productData.stream().mapToInt(ProductNumberInfor::getCheckOutNumber).sum());
-                        });
-                        productDataMap.forEach((productName, productData) -> {
-                            int totalClicksForProduct = productData.stream().mapToInt(ProductNumberInfor::getClickNumber).sum();
-                            int totalAddToCartForProduct = productData.stream().mapToInt(ProductNumberInfor::getAddToCartNumber).sum();
-                            int totalCheckOutForProduct = productData.stream().mapToInt(ProductNumberInfor::getCheckOutNumber).sum();
-                            double clickPercentage = totalClicksForMonth.get() > 0 ? (totalClicksForProduct * 100.0 / totalClicksForMonth.get()) : 0;
-                            double addToCartPercentage = totalAddToCartForMonth.get() > 0 ? (totalAddToCartForProduct * 100.0 / totalAddToCartForMonth.get()) : 0;
-                            double checkOutPercentage = totalCheckOutForMonth.get() > 0 ? (totalCheckOutForProduct * 100.0 / totalCheckOutForMonth.get()) : 0;
-                            result.append(String.format("Product: %s Click %%: %.2f%% Add to Cart %%: %.2f%% Check Out %%: %.2f%%\n",
-                                    productName, clickPercentage, addToCartPercentage, checkOutPercentage));
-                        });
-                        result.append("------------");
-                        try {
-                            bw.write(result.toString());
-                            bw.newLine();
-                        } catch (IOException e) {
-                            System.out.println(e.getMessage());
-                        }
-                    });
+                    String line2Write = String.format(
+                            "ID: %d ,Month: %d, Year: %d - AddToCart: %.2f%%, CheckOut: %.2f%%",
+                            value.getId(),
+                            value.getMonth(),
+                            value.getYear(),
+                            addToCartPercent,
+                            checkOutPercent
+                    );
 
+                    bw.write(line2Write);
+                    bw.newLine();
+                } catch (IOException e) {
+                   e.getCause();
+                }
+            });
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            e.getCause();
         }
     }
 
+    public Map<CRStatistic, CRStatistic> getDataStatistics(List<Statistic> statistics) {
+        Map<CRStatistic, CRStatistic> dataCrStatistics = statistics.stream()
+                .collect(Collectors.groupingBy(
+                        cr -> new CRStatistic(cr.getId(), cr.getMonthOFDate(), cr.getYearOFDate()),
+                        Collectors.collectingAndThen(
+                                Collectors.toList(),
+                                listCr -> {
+                                    if (listCr.isEmpty()) {
+                                        return null;
+                                    }
+                                    Statistic firstStatistic = listCr.get(0);
+                                    CRStatistic crStatistic = new CRStatistic(
+                                            firstStatistic.getId(),
+                                            firstStatistic.getMonthOFDate(),
+                                            firstStatistic.getYearOFDate()
+                                    );
 
+                                    int totalView = listCr.stream().mapToInt(Statistic::getView).sum();
+                                    int totalAddToCart = listCr.stream().mapToInt(Statistic::getAddToCart).sum();
+                                    int totalCheckOut = listCr.stream().mapToInt(Statistic::getCheckOut).sum();
+
+                                    crStatistic.setTotalView(totalView);
+                                    crStatistic.setTotalAddToCart(totalAddToCart);
+                                    crStatistic.setTotalCheckOut(totalCheckOut);
+
+                                    return crStatistic;
+                                }
+                        )
+                ));
+
+        return dataCrStatistics;
+    }
 
 }

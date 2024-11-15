@@ -1,0 +1,5 @@
+ID: 1 ,Month: 2, Year: 2024 - AddToCart: 8.66%, CheckOut: 0.39%
+ID: 1 ,Month: 2, Year: 2023 - AddToCart: 2.00%, CheckOut: 0.20%
+ID: 1 ,Month: 3, Year: 2024 - AddToCart: 0.13%, CheckOut: 0.13%
+ID: 2 ,Month: 3, Year: 2023 - AddToCart: 20.00%, CheckOut: 20.00%
+ID: 2 ,Month: 2, Year: 2024 - AddToCart: 3.10%, CheckOut: 0.33%

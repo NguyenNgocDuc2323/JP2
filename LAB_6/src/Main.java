@@ -1,24 +1,22 @@
 import Controller.FileController;
-import Entity.Product;
-import Entity.ProductNumberInfor;
+import Entity.CRStatistic;
+import Entity.Statistic;
 import Service.FileService;
 
-import java.util.ArrayList;
+import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import java.util.stream.Collectors;
 public class Main {
     public static void main(String[] args) {
         String sysPath = System.getProperty("user.dir");
-        String fileInPath = sysPath.replace("/","\\") + "/Data/ProductCenter.in.txt";
-        String fileOutPath = sysPath.replace("/","\\") + "/Data/ProductCenter.out.txt";
-        List<Product> products = new ArrayList<Product>();
-        List<ProductNumberInfor> productNumberInfors = new ArrayList<>();
-        FileService fileService = new FileService(productNumberInfors,products);
+        String fileInPath = sysPath.replace("/", "\\") + "/Data/statistic.in.txt";
+        String fileOutPath = sysPath.replace("/", "\\") + "/Data/statistic.out.txt";
+        FileService fileService = new FileService();
         FileController fileController = new FileController(fileService);
-        products.add(new Product(1,"Iphone",2500));
-        products.add(new Product(2,"Sam Sung",1500));
-        fileController.readFile(fileInPath);
-        fileController.writeFile(fileOutPath);
+        List<Statistic> statistics = fileController.readFileStatistics(fileInPath);
+        Map<CRStatistic, CRStatistic> statisticStatisticMap = fileController.getDataStatistics(statistics);
+        fileController.writeFileStatistics(fileOutPath,statisticStatisticMap);
     }
 }

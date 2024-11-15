@@ -1,7 +1,7 @@
 package Controller;
 
-import Entity.Product;
-import Entity.ProductNumberInfor;
+import Entity.CRStatistic;
+import Entity.Statistic;
 import Service.FileService;
 
 import java.util.List;
@@ -12,10 +12,13 @@ public class FileController {
     public FileController(FileService fileService) {
         this.fileService = fileService;
     }
-    public List<ProductNumberInfor> readFile(String path){
-        return fileService.readFile(path);
+    public List<Statistic> readFileStatistics(String fileName){
+        return fileService.readFileStatistics(fileName);
     }
-    public void writeFile(String path){
-        fileService.writeFile(path);
+    public void writeFileStatistics(String fileName, Map<CRStatistic, CRStatistic> statisticMap){
+        fileService.writeFileStatistics(fileName, statisticMap);
+    }
+    public Map<CRStatistic, CRStatistic> getDataStatistics(List<Statistic> statistics){
+        return fileService.getDataStatistics(statistics);
     }
 }
