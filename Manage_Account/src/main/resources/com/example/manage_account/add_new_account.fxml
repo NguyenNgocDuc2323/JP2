@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="controller.AddAccountController">
+    <children>
+        <Label layoutX="50" layoutY="30" text="Add New Account" />
+        <TextField fx:id="txt_email" layoutX="50" layoutY="70" promptText="Email" />
+        <TextField fx:id="txt_password" layoutX="50" layoutY="110" promptText="Password" />
+        <Button fx:id="btn_save" layoutX="50" layoutY="150" text="Save" />
+        <Button fx:id="btn_cancel" layoutX="120" layoutY="150" text="Cancel" />
+    </children>
+</AnchorPane>
+
